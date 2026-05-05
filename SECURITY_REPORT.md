@@ -1,232 +1,84 @@
-# Relatório de Segurança
+# Security Review Summary
 
-Data da análise: 2026-05-05
+This repository includes a sanitized summary of the security themes uncovered during the modernization effort.
 
-Escopo analisado:
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/netq-log-platform`
+The goal of including this document publicly is not to expose internal implementation details. It is to show how security review shaped the architecture and migration priorities.
 
-Metodologia:
-- Revisão estática de código e configuração
-- Inspeção de fluxos de autenticação, sessão, integração externa e exposição de segredos
-- Não foram executados testes dinâmicos, varredura SAST automatizada nem pentest em execução
+## Review approach
 
-## Resumo executivo
+- Static review of legacy and modern code paths
+- Inspection of authentication, session, integration, and configuration boundaries
+- No live penetration testing was performed as part of this repository snapshot
 
-O projeto apresenta riscos relevantes em ambos os componentes analisados.
+## Main security findings
 
-- A aplicação legada `NetQTools` concentra os problemas mais graves: segredos versionados, autenticação LDAP com confiança cega em certificado, endpoints sensíveis potencialmente acessíveis sem validação de sessão e saída HTML montada com dados não escapados.
-- A plataforma nova `netq-log-platform` melhora a organização do código, mas ainda tem uma falha crítica de autorização: os endpoints backend de consulta de auditoria não validam autenticação no servidor e podem ser acessados diretamente se o serviço estiver exposto na rede.
-- Também há fragilidades operacionais importantes, como uso de HTTP sem TLS para integrações internas e mecanismos de bypass/mock de autenticação que precisam de controles rígidos de deploy.
+### 1. Secrets handling must be treated as a migration blocker
 
-## Achados prioritários
+One of the highest-risk patterns in legacy modernization is allowing real credentials, session artifacts, or environment-specific configuration to live in the repository.
 
-### 1. Crítico: segredos reais e credenciais internas armazenados no repositório
+Key lesson:
 
-Impacto:
-- Comprometimento imediato de credenciais de usuário, credenciais técnicas LDAP e autenticação básica de integrações
-- Movimento lateral para serviços internos
-- Risco de vazamento duradouro mesmo após remoção do arquivo, se o histórico Git já foi compartilhado
+- sanitization is not just a documentation task
+- it is part of the engineering work required to make the system maintainable and safe
 
-Evidências:
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/netq-log-platform/login.example.json:4`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/conf/app_PRD.json:6`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/conf/app_PRD.json:24`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/conf/app_DEV.json:6`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/conf/app_DEV.json:24`
+### 2. Frontend route protection is not enough
 
-Detalhe:
-- O repositorio continha um `login.json` com `username` e `password`; ele foi convertido para `login.example.json`.
-- Os arquivos legados `app_PRD.json`, `app_DEV.json` e `app.json` continham senha de basic auth e senha do bind LDAP; os valores do working tree atual foram substituidos por placeholders.
+A major backend design concern was the gap between browser-side route protection and authoritative backend authorization.
 
-Recomendação:
-- Rotacionar imediatamente todas as credenciais expostas.
-- Remover segredos do repositório e do histórico.
-- Adotar somente secret manager ou arquivos montados fora do versionamento.
-- Adicionar varredura de segredos no pipeline.
+Key lesson:
 
-### 2. Crítico: endpoints backend de auditoria sem autenticação/autorização no servidor
+- if a business endpoint is sensitive, the backend must validate access itself
+- proxy or middleware checks can improve UX, but they are not a full security boundary
 
-Impacto:
-- Qualquer cliente que alcance o backend pode consultar logs e payloads sensíveis sem sessão válida
-- A proteção atual fica dependente apenas do frontend/proxy, o que não é controle de segurança suficiente
+### 3. Legacy trust assumptions often survive framework migration
 
-Evidências:
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/netq-log-platform/backend/app/api/routes/audit_logs.py:18`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/netq-log-platform/backend/app/api/routes/audit_logs.py:34`
-- Em contraste, a sessão só é validada nos fluxos de auth em `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/netq-log-platform/backend/app/application/auth/service.py:93`
-- O frontend apenas repassa o cookie em `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/netq-log-platform/frontend/shared/lib/auth-client.server.ts:130`
+The legacy implementation contained patterns that are common in internal tools:
 
-Detalhe:
-- As rotas `/audit-logs/query` e `/audit-logs/related-detail` não usam dependência de autenticação nem verificam sessão.
-- Se o backend FastAPI estiver exposto por ingress, service mesh ou porta local acessível, o atacante pode chamar a API diretamente.
+- trust-all certificate behavior
+- direct integration assumptions
+- session handling coupled to old platform defaults
 
-Recomendação:
-- Exigir autenticação e autorização no backend para todas as rotas de negócio.
-- Implementar uma dependência obrigatória que valide a sessão antes de executar `AuditLogsService`.
-- Restringir exposição de rede do backend enquanto a correção não é aplicada.
+Key lesson:
 
-### 3. Alto: aplicação legada aceita LDAP sobre TLS sem validar certificado
+- moving from Java/JSP to a modern stack does not automatically remove insecure assumptions
 
-Impacto:
-- Permite ataque man-in-the-middle na autenticação LDAP
-- Credenciais de usuários e credenciais técnicas podem ser interceptadas
+### 4. Rendering strategy affects security posture
 
-Evidências:
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/src/java/NetqTools/Login.java:68`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/src/java/NetqTools/Login.java:72`
-- O componente novo também admite desabilitar validação em `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/netq-log-platform/k8s/base/backend-configmap.yaml:17`
+The legacy application assembled parts of the UI directly from backend-generated HTML and external payload content.
 
-Detalhe:
-- O legado usa `TrustAllTrustManager`, que invalida o objetivo do LDAPS.
-- No deployment novo, `NETQ_LDAP_VALIDATE_CERTIFICATES` está definido como `"false"`.
+Key lesson:
 
-Recomendação:
-- Remover `TrustAllTrustManager`.
-- Instalar cadeia de CA confiável no runtime.
-- Bloquear promoção para produção quando a validação de certificado estiver desativada.
+- output encoding and rendering strategy belong in architecture discussions, not just bug-fix queues
+- a clean API boundary reduces XSS risk and makes review easier
 
-### 4. Alto: servlets legados de consulta parecem acessíveis sem validação explícita de sessão
+### 5. Internal traffic still deserves transport protection
 
-Impacto:
-- Possível acesso direto a consultas operacionais e integrações sensíveis sem login
-- Bypass de proteção de tela/JSP por chamada direta ao servlet
+A recurring issue in operational systems is the idea that "internal network" equals "trusted network".
 
-Evidências:
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/src/java/NetqTools/URLRequest.java:44`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/src/java/NetqTools/URLRequest.java:179`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/src/java/NetqTools/URLRequestSigra.java:42`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/src/java/NetqTools/URLRequestSigra.java:116`
+Key lesson:
 
-Detalhe:
-- Os servlets processam requisições GET e POST, consomem parâmetros do usuário e executam lógica de integração.
-- Não há checagem local de `LOGGED_USERNAME` ou filtro de autenticação nesses endpoints.
-- A proteção observada está na JSP `menu.jsp`, o que não impede acesso direto ao servlet.
+- HTTP-only internal integrations still create exposure
+- modernization should revisit transport guarantees, not only UI and framework choices
 
-Recomendação:
-- Adicionar validação de sessão em todos os servlets sensíveis.
-- Preferir filtro servlet centralizado para autenticação/autorização.
-- Restringir métodos e rotas até a correção.
+## Public remediation themes
 
-### 5. Alto: saída HTML legada é construída com dados não escapados, com risco de XSS
+The most important remediation directions in this project were:
 
-Impacto:
-- Execução de JavaScript no navegador do operador
-- Roubo de sessão, falsificação de ações e exfiltração de dados visualizados
+- remove or replace sensitive values with placeholders
+- move configuration toward externalized secrets and environment-based setup
+- enforce authorization in backend business routes
+- validate TLS assumptions explicitly
+- reduce dynamic HTML assembly and favor structured responses
+- make risky defaults visible in code and deployment config
 
-Evidências:
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/src/java/NetqTools/URLRequest.java:96`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/src/java/NetqTools/URLRequest.java:99`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/src/java/NetqTools/URLRequest.java:109`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/src/java/NetqTools/URLRequest.java:157`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/src/java/NetqTools/URLRequestSigra.java:93`
+## Why this matters in interviews
 
-Detalhe:
-- Parâmetros e payloads externos são concatenados diretamente em HTML.
-- Como o sistema exibe respostas de integrações e XMLs externos, o vetor não depende apenas de input local do usuário.
+This project is a good example of how I think about security in real delivery work:
 
-Recomendação:
-- Escapar toda saída HTML.
-- Renderizar payloads apenas como texto.
-- Aplicar CSP e remover concatenação manual em servlets/JSPs.
+- not as a separate phase
+- not as a compliance checkbox
+- but as part of architecture, migration sequencing, and operational readiness
 
-### 6. Alto: integrações internas usam HTTP sem TLS
+## Scope note
 
-Impacto:
-- Interceptação e alteração de tráfego interno
-- Exposição de dados operacionais e credenciais basic auth em rede
-
-Evidências:
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/conf/app_PRD.json:3`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/conf/app_PRD.json:7`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/conf/app_PRD.json:15`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/netq-log-platform/k8s/base/backend-configmap.yaml:18`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/netq-log-platform/k8s/base/backend-configmap.yaml:21`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/netq-log-platform/k8s/base/backend-configmap.yaml:28`
-
-Recomendação:
-- Migrar integrações para HTTPS ou túnel autenticado.
-- Impedir envio de basic auth por HTTP puro.
-
-## Achados secundários
-
-### 7. Médio: modo de autenticação mock e bypass habilitáveis por configuração
-
-Impacto:
-- Se variáveis de ambiente incorretas forem promovidas, a aplicação pode autenticar usuários sem LDAP real
-
-Evidências:
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/netq-log-platform/backend/app/core/config.py:28`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/netq-log-platform/backend/app/core/config.py:45`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/netq-log-platform/frontend/shared/lib/dev-auth.ts:1`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/netq-log-platform/frontend/proxy.ts:6`
-
-Detalhe:
-- O backend sobe por padrão com `auth_provider = "mock"` e `mock_password = "secret"`.
-- O frontend admite bypass com `NETQ_SKIP_AUTH=true`.
-
-Recomendação:
-- Falhar o startup fora de ambiente local quando mock/bypass estiver habilitado.
-- Separar builds de desenvolvimento e produção.
-
-### 8. Médio: cookies/sessão no legado sem flags de segurança explícitas
-
-Impacto:
-- Maior exposição a roubo de cookie e abuso em cenários com XSS ou tráfego inseguro
-
-Evidências:
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/src/java/NetqTools/Login.java:97`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/src/java/NetqTools/SessionPing.java:34`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/web/WEB-INF/web.xml:14`
-
-Detalhe:
-- Não foram encontrados ajustes explícitos de `HttpOnly`, `Secure` e `SameSite` no legado.
-- O código manipula cookies de sessão diretamente, o que aumenta a chance de configuração inconsistente.
-
-Recomendação:
-- Configurar flags de cookie no container e na aplicação.
-- Renovar sessão após login.
-
-### 9. Médio: bibliotecas legadas antigas aumentam superfície de vulnerabilidade conhecida
-
-Evidências:
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/web/js/jquery-1.12.4.js:2`
-- `/Users/diegodmitry/Documents/Projects.nosync/netq_support_tools/NetQTools/web/js/highlight.pack.js:1`
-
-Detalhe:
-- `jQuery 1.12.4` e `highlight.js 9.12.0` estão muito defasados.
-
-Recomendação:
-- Atualizar dependências do legado ou isolar a aplicação até descontinuação.
-
-## Pontos positivos
-
-- O backend novo usa tipagem e validação com Pydantic nas rotas.
-- Os cookies da plataforma nova são emitidos com `HttpOnly` e `SameSite=Lax`.
-- Há preocupação explícita com secrets montados por arquivo no backend novo.
-
-## Plano de remediação recomendado
-
-### Imediato
-
-1. Rotacionar todas as credenciais expostas e invalidar qualquer senha ou usuário técnico comprometido.
-2. Manter `login.example.json` e os arquivos legados apenas com placeholders, sem restaurar segredos reais no repositório.
-3. Proteger no backend as rotas `/audit-logs/*` com validação obrigatória de sessão.
-4. Bloquear deploy com `NETQ_SKIP_AUTH=true`, `auth_provider=mock` ou `NETQ_LDAP_VALIDATE_CERTIFICATES=false`.
-
-### Curto prazo
-
-1. Corrigir o legado para validar sessão em todos os servlets.
-2. Eliminar `TrustAllTrustManager` e restaurar validação de certificado LDAP.
-3. Escapar toda saída HTML do legado e reduzir renderização direta de payload.
-4. Migrar integrações internas críticas para transporte cifrado.
-
-### Médio prazo
-
-1. Introduzir SAST, secret scanning e policy checks no CI.
-2. Revisar modelo de autorização por perfil e trilha de auditoria.
-3. Planejar retirada controlada da aplicação legada `NetQTools`.
-
-## Conclusão
-
-O risco atual do repositório é alto. O ponto mais urgente é a combinação de segredos expostos com controles insuficientes de autenticação/autorização, especialmente no backend novo e na aplicação legada. Antes de qualquer exposição ampliada do sistema, vale tratar pelo menos os itens críticos e altos deste relatório.
+This is a sanitized public summary. Specific credentials, environment details, internal endpoints, and sensitive identifiers were intentionally removed or generalized.
