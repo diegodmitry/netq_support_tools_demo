@@ -1,0 +1,26 @@
+{
+    "configuration" : {
+        "mongoProd" : "https://mongo-prod.example.internal/netq/test/",
+		"mongoProdBasicAuth": true,
+		"mongoProdBasicAuthUser": "REPLACE_ME",
+		"mongoProdBasicAuthPass": "REPLACE_ME",
+        "auditProd" : "https://audit-prod.example.internal/netq/audit/",
+		"auditProdBasicAuth": false,
+		"auditProdBasicAuthUser": "",
+		"auditProdBasicAuthPass": "",
+        "mongoQA" : "https://mongo-qa.example.internal/netq/test/",
+        "auditQA" : "https://audit-qa.example.internal/netq/audit/",
+        "auxURL" : "?related=true",
+        "auxURLaudit" : "?cache=true",
+        "sapaUrl" : "https://sapa.example.internal/interface_generica/query_xml2_v2.asp?id_servico=",
+        "sigraApp" : "NETQ",
+        "sigraCodeApp" : "99",
+        "sigraUrl" : "https://sigra.example.internal/PTP/25_RESOURCE/ResourceNetwork/Services/1.0/getNetworkInformation",
+        "sigraAction" : "https://sigra.example.internal/services/ResourceNetwork/1.0/getNetworkInformation",
+        "sigraTimeout" : "30",
+        "ldap_server" : "ldap.example.internal",
+        "ldap_port": 3269,
+        "ldap_user_dn": "CN=REPLACE_ME,OU=Applications,DC=example,DC=internal",
+        "ldap_user_db_password": "REPLACE_ME"
+    }
+}
