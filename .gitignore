@@ -49,3 +49,6 @@ target/
 
 # NetBeans / legacy project-local files
 **/nbproject/private/
+
+# Legacy VCS metadata
+NetQTools/.svn/
