@@ -1,0 +1,31 @@
+<svg width="1440" height="1024" viewBox="0 0 1440 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1440" height="1024" fill="#F3EEE6"/>
+  <rect width="1440" height="1024" fill="url(#bgB)"/>
+  <circle cx="1120" cy="220" r="280" fill="#D5E9E1"/>
+  <circle cx="240" cy="880" r="260" fill="#1F8A70" fill-opacity="0.08"/>
+  <rect x="360" y="120" width="720" height="784" rx="40" fill="#FFFDFC" stroke="#D8D0C4"/>
+  <text x="720" y="228" text-anchor="middle" fill="#70806D" font-family="Arial, sans-serif" font-size="15" letter-spacing="4">NETQ OPERATIONS</text>
+  <text x="720" y="320" text-anchor="middle" fill="#13181E" font-family="Georgia, serif" font-size="78" font-weight="700">Single card login</text>
+  <text x="720" y="374" text-anchor="middle" fill="#5B646F" font-family="Arial, sans-serif" font-size="24">Everything essential in one centered panel, with no marketing rail.</text>
+  <rect x="500" y="458" width="440" height="80" rx="20" fill="#FAF7F2" stroke="#D8D0C4"/>
+  <text x="528" y="489" fill="#70806D" font-family="Arial, sans-serif" font-size="14" letter-spacing="2">DOMAIN</text>
+  <text x="528" y="519" fill="#13181E" font-family="Arial, sans-serif" font-size="24">PTPORTUGAL</text>
+  <path d="M888 490L904 506L920 490" stroke="#70806D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="500" y="558" width="440" height="80" rx="20" fill="#FAF7F2" stroke="#D8D0C4"/>
+  <text x="528" y="589" fill="#70806D" font-family="Arial, sans-serif" font-size="14" letter-spacing="2">USERNAME</text>
+  <text x="528" y="619" fill="#A0A7AE" font-family="Arial, sans-serif" font-size="24">username</text>
+  <rect x="500" y="658" width="440" height="80" rx="20" fill="#FAF7F2" stroke="#D8D0C4"/>
+  <text x="528" y="689" fill="#70806D" font-family="Arial, sans-serif" font-size="14" letter-spacing="2">PASSWORD</text>
+  <text x="528" y="719" fill="#A0A7AE" font-family="Arial, sans-serif" font-size="24">••••••••••••</text>
+  <rect x="500" y="770" width="440" height="70" rx="20" fill="#1F8A70"/>
+  <text x="720" y="814" text-anchor="middle" fill="#F6FBF9" font-family="Arial, sans-serif" font-size="23" font-weight="700">Login</text>
+  <rect x="500" y="868" width="440" height="1" fill="#E2DBD0"/>
+  <text x="720" y="896" text-anchor="middle" fill="#7B858E" font-family="Arial, sans-serif" font-size="18">Session-expired and auth-error messages appear above the form only.</text>
+  <text x="68" y="88" fill="#86958A" font-family="Arial, sans-serif" font-size="13" letter-spacing="3">OPTION B</text>
+  <defs>
+    <linearGradient id="bgB" x1="0" y1="0" x2="1440" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8F4EE"/>
+      <stop offset="1" stop-color="#ECE2D5"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,6 @@
+# Netscape HTTP Cookie File
+# https://curl.se/docs/http-cookies.html
+# Example file for local testing only.
+# Do not store real session cookies in the repository.
+
+#HttpOnly_127.0.0.1	FALSE	/	FALSE	0000000000	netq_session	REPLACE_ME

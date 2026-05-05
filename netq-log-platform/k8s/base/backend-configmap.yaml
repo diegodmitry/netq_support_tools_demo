@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: netq-log-platform-backend-config
+data:
+  NETQ_ENVIRONMENT: "prod"
+  NETQ_API_PREFIX: "/api/v1"
+  NETQ_SESSION_COOKIE_NAME: "netq_session"
+  NETQ_SESSION_IDLE_TIMEOUT_SECONDS: "28800"
+  NETQ_KEEP_ALIVE_INTERVAL_SECONDS: "300"
+  NETQ_OUTBOUND_HTTP_TIMEOUT_SECONDS: "5.0"
+  NETQ_OUTBOUND_HTTP_MAX_RETRIES: "2"
+  NETQ_OUTBOUND_HTTP_RETRY_BACKOFF_SECONDS: "0.2"
+  NETQ_AUTH_PROVIDER: "ldap"
+  NETQ_ALLOWED_USERS: ""
+  NETQ_LDAP_SERVER: "ldap.example.internal"
+  NETQ_LDAP_PORT: "3269"
+  NETQ_LDAP_USE_SSL: "true"
+  # Temporary diagnostic setting. Switch to true after CA chain is mounted in the backend container.
+  NETQ_LDAP_VALIDATE_CERTIFICATES: "false"
+  NETQ_MONGO_PROD_URL: "https://mongo-prod.example.internal/netq/test/"
+  NETQ_MONGO_PROD_BASIC_AUTH_ENABLED: "true"
+  NETQ_MONGO_PROD_BASIC_AUTH_USER: "netq"
+  NETQ_AUDIT_PROD_URL: "https://audit-prod.example.internal/netq/audit/"
+  NETQ_AUDIT_PROD_BASIC_AUTH_ENABLED: "false"
+  NETQ_AUDIT_PROD_BASIC_AUTH_USER: ""
+  NETQ_MONGO_QA_URL: "https://mongo-qa.example.internal/netq/test/"
+  NETQ_AUDIT_QA_URL: "https://audit-qa.example.internal/netq/audit/"
+  NETQ_AUX_URL: "?related=true"
+  NETQ_AUX_URL_AUDIT: "?cache=true"
+  NETQ_SAPA_URL: "https://sapa.example.internal/interface_generica/query_xml2_v2.asp?id_servico="
+  NETQ_SIGRA_APP: "NETQ"
+  NETQ_SIGRA_CODE_APP: "99"
+  NETQ_SIGRA_TIMEOUT_SECONDS: "30"

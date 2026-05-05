@@ -1,0 +1,237 @@
+/* 
+    Created on : Apr 10, 2018, 11:40:38 AM
+    Author     : Pedro Jose Correia Alves dos Reis (pedro-j-reis@telecom.pt)
+*/
+
+.menu{
+    line-height: 0 !important;
+}
+.menu a {
+    line-height: 0 !important;
+}
+
+.button{
+    line-height: 0 !important;
+    vertical-align: bottom;
+}
+
+.button.hollow.esq{
+    text-align: left;
+    border: 0px;
+    color: #767676;
+}
+
+.button.hollow.esq:hover{
+    color: #ffffff;
+}
+
+.position-esq {
+    left: 0;
+    height: 100%;
+    overflow-y: auto;
+    width: 250px;
+    -ms-transform: translateX(-250px);
+    transform: translateX(-250px);
+}
+
+
+.app_input{ 
+    height: 24px;
+    width: 200px;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.app_select{
+    height: 24px;
+    width: 120px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-size: 12px;
+    margin-right: 4px;
+    padding-left: 8px;
+    cursor: pointer;
+}
+.text_menu{
+    font-size: small;
+}
+tab{
+    padding-left: 20px;
+}
+tab2{
+    padding-left: 40px;
+}
+.backgroud_black{
+    background-color: #000 !important;
+    color:#ffffff;
+    vertical-align: middle;
+    line-height: 1.6;
+}
+
+.button.hollow.tri {
+      border: 1px solid #767676;
+      color: #767676; 
+}
+
+.button.hollow.tri:hover, .button.hollow.tri:focus {
+        border-color: #ffffff;
+        color: #ffffff; 
+}
+
+.backgroud_black h5{
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: bolder;
+    line-height: 1.4;
+}
+
+.link_app{
+    padding: 0px !important;
+}
+
+.resposta{
+    padding-top: 10px;
+    font-size: 12px;
+}
+
+.accordion-title{
+    padding: 5px 5px;
+    color: #999999
+}
+
+.accordion-title:hover, .accordion-title:focus {
+    background-color: #000;
+}
+
+a:hover, a:focus {
+    color: #ffffff;
+    background-color: #000;
+}
+
+.wait{
+    padding-top: 100px;
+    display: flex;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-left {
+    width: 20px;
+    height: 10px;
+    background-color: white;
+    color: black;
+    border: 1px solid #000;
+    margin-left: 4px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.btn-left.btn-plus {
+    background-color: white;
+    color: #999999;
+    border: 1px solid #999999;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+}
+
+.btn-right {
+    float: right;
+    width: 20px;
+    height: 10px;
+    background-color: white;
+    color: black;
+    border: 1px solid #000;
+    margin-right: 4px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+   
+    
+}
+
+.btn-right.btn-plus {
+    background-color: white;
+    color: #999999;
+    border: 1px solid #999999;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.translucent-form-overlay {
+  max-width: 500px;
+  width: 100%;
+  background-color: rgba(54, 54, 54, 0.8);
+  padding: 20px;
+  color: #fefefe;
+}
+
+.translucent-form-overlay-erro {
+  max-width: 500px;
+  width: 100%;
+  background-color: rgba(255, 0, 0, 0.3);
+  padding: 20px;
+  color: #fefefe;
+}
+
+.translucent-form-overlay .columns.row {
+  display: block;
+}
+
+.translucent-form-overlay h3, .translucent-form-overlay label {
+  color: #fefefe;
+}
+
+.translucent-form-overlay input, .translucent-form-overlay select {
+  color: #8a8a8a;
+  font-size: 12px;
+  height: 34px;
+}
+
+.translucent-form-overlay input::-webkit-input-placeholder {
+  color: #8a8a8a;
+}
+
+.translucent-form-overlay input:-ms-input-placeholder {
+  color: #8a8a8a;
+}
+
+.translucent-form-overlay input::placeholder {
+  color: #8a8a8a;
+}
+
+.login_bckg{
+    background-color: #8a8a8a;
+}
+
+#login {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+
+    /*
+    *  Where the magic happens
+    *  Centering method from CSS Tricks
+    *  http://css-tricks.com/centering-percentage-widthheight-elements/
+    */
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+#errologin {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+
+    /*
+    *  Where the magic happens
+    *  Centering method from CSS Tricks
+    *  http://css-tricks.com/centering-percentage-widthheight-elements/
+    */
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}

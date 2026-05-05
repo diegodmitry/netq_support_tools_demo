@@ -1,0 +1,20 @@
+<svg width="1440" height="1024" viewBox="0 0 1440 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1440" height="1024" fill="#F6F7F9"/>
+  <rect x="120" y="72" width="1200" height="880" rx="36" fill="#FBFBFC" stroke="#E5E7EB"/>
+  <text x="720" y="174" text-anchor="middle" fill="#6B7280" font-family="Arial, sans-serif" font-size="14" letter-spacing="4">NETQ SUPPORT TOOLS</text>
+  <text x="720" y="270" text-anchor="middle" fill="#111827" font-family="Georgia, serif" font-size="78" font-weight="700">Sign in</text>
+  <text x="720" y="316" text-anchor="middle" fill="#6B7280" font-family="Arial, sans-serif" font-size="24">Minimal, centered, and focused on a single action.</text>
+  <rect x="490" y="394" width="460" height="84" rx="22" fill="white" stroke="#E5E7EB"/>
+  <text x="520" y="428" fill="#6B7280" font-family="Arial, sans-serif" font-size="13" letter-spacing="2">DOMAIN</text>
+  <text x="520" y="460" fill="#111827" font-family="Arial, sans-serif" font-size="24">PTPORTUGAL</text>
+  <path d="M894 428L910 444L926 428" stroke="#6B7280" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="490" y="498" width="460" height="84" rx="22" fill="white" stroke="#E5E7EB"/>
+  <text x="520" y="532" fill="#6B7280" font-family="Arial, sans-serif" font-size="13" letter-spacing="2">USERNAME</text>
+  <text x="520" y="564" fill="#9CA3AF" font-family="Arial, sans-serif" font-size="24">username</text>
+  <rect x="490" y="602" width="460" height="84" rx="22" fill="white" stroke="#E5E7EB"/>
+  <text x="520" y="636" fill="#6B7280" font-family="Arial, sans-serif" font-size="13" letter-spacing="2">PASSWORD</text>
+  <text x="520" y="668" fill="#9CA3AF" font-family="Arial, sans-serif" font-size="24">••••••••••••</text>
+  <rect x="490" y="724" width="460" height="72" rx="22" fill="#111827"/>
+  <text x="720" y="769" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="700">Login</text>
+  <text x="720" y="854" text-anchor="middle" fill="#9CA3AF" font-family="Arial, sans-serif" font-size="18">Example 1: strict minimal card</text>
+</svg>

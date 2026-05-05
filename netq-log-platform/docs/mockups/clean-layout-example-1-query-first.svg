@@ -1,0 +1,44 @@
+<svg width="1440" height="1024" viewBox="0 0 1440 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1440" height="1024" fill="#F5F1EA"/>
+  <rect x="32" y="24" width="1376" height="64" rx="28" fill="#FBFAF7" stroke="#D8D2C7"/>
+  <text x="56" y="63" font-family="Helvetica, Arial, sans-serif" font-size="18" letter-spacing="2" fill="#6F7584">NETQ SUPPORT TOOLS</text>
+  <rect x="1180" y="36" width="196" height="40" rx="20" fill="#FBFAF7" stroke="#D8D2C7"/>
+  <text x="1210" y="61" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#1D2739">xid11185 Logout</text>
+
+  <text x="32" y="136" font-family="Georgia, serif" font-size="52" font-weight="700" fill="#1D2739">Audit Logs query</text>
+  <text x="32" y="176" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#6F7584">Primary task first: the form owns the screen and session context becomes secondary.</text>
+
+  <rect x="32" y="216" width="1376" height="320" rx="28" fill="#FBFAF7" stroke="#D8D2C7"/>
+  <text x="56" y="262" font-family="Helvetica, Arial, sans-serif" font-size="16" letter-spacing="2" fill="#6F7584">QUERY FORM</text>
+  <rect x="56" y="290" width="640" height="74" rx="20" fill="#FFFFFF" stroke="#D8D2C7"/>
+  <text x="80" y="335" font-family="Helvetica, Arial, sans-serif" font-size="28" fill="#1D2739">Environment: Production</text>
+  <rect x="712" y="290" width="640" height="74" rx="20" fill="#FFFFFF" stroke="#D8D2C7"/>
+  <text x="736" y="335" font-family="Helvetica, Arial, sans-serif" font-size="28" fill="#1D2739">ID type: NETQ</text>
+  <rect x="56" y="394" width="1296" height="74" rx="20" fill="#FFFFFF" stroke="#D8D2C7"/>
+  <text x="80" y="439" font-family="Helvetica, Arial, sans-serif" font-size="28" fill="#6F7584">ID value: c101019e-6ccd-43f4-8bf3-5110fc6a15b9</text>
+  <rect x="56" y="484" width="1296" height="28" rx="14" fill="#111827"/>
+  <text x="648" y="504" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#FFFFFF">Run query</text>
+
+  <rect x="32" y="568" width="1376" height="110" rx="28" fill="#FBFAF7" stroke="#D8D2C7"/>
+  <text x="56" y="612" font-family="Helvetica, Arial, sans-serif" font-size="16" letter-spacing="2" fill="#6F7584">SESSION SUMMARY</text>
+  <text x="56" y="648" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#1D2739">xid11185</text>
+  <text x="290" y="648" font-family="Helvetica, Arial, sans-serif" font-size="24" fill="#6F7584">ptportugal</text>
+  <text x="520" y="648" font-family="Helvetica, Arial, sans-serif" font-size="24" fill="#6F7584">timeout 28800s</text>
+  <text x="790" y="648" font-family="Helvetica, Arial, sans-serif" font-size="24" fill="#6F7584">keep-alive 300s</text>
+  <rect x="1110" y="606" width="120" height="32" rx="16" fill="#EEF5EE" stroke="#CFE3CF"/>
+  <text x="1170" y="627" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1D2739">session active</text>
+  <rect x="1244" y="606" width="120" height="32" rx="16" fill="#EEF1F4" stroke="#D8DDE5"/>
+  <text x="1304" y="627" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1D2739">backend guarded</text>
+
+  <rect x="32" y="710" width="440" height="240" rx="28" fill="#FBFAF7" stroke="#D8D2C7"/>
+  <text x="56" y="752" font-family="Helvetica, Arial, sans-serif" font-size="16" letter-spacing="2" fill="#6F7584">MODULES</text>
+  <text x="56" y="804" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#1D2739">Audit Logs</text>
+  <text x="56" y="842" font-family="Helvetica, Arial, sans-serif" font-size="24" fill="#6F7584">Primary operational request lookup.</text>
+  <text x="56" y="892" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#1D2739">SIGRA</text>
+  <text x="56" y="930" font-family="Helvetica, Arial, sans-serif" font-size="24" fill="#6F7584">SOAP flow with readable payload views.</text>
+
+  <rect x="504" y="710" width="904" height="240" rx="28" fill="#FBFAF7" stroke="#D8D2C7"/>
+  <text x="528" y="752" font-family="Helvetica, Arial, sans-serif" font-size="16" letter-spacing="2" fill="#6F7584">SYSTEM STATE</text>
+  <text x="528" y="808" font-family="Georgia, serif" font-size="44" font-weight="700" fill="#1D2739">No query executed yet</text>
+  <text x="528" y="852" font-family="Helvetica, Arial, sans-serif" font-size="24" fill="#6F7584">Clean result space reserved for first query response and progressive detail panels.</text>
+</svg>

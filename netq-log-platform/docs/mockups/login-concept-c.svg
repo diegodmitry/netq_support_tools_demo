@@ -1,0 +1,37 @@
+<svg width="1440" height="1024" viewBox="0 0 1440 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1440" height="1024" fill="#EEE7DB"/>
+  <rect width="1440" height="1024" fill="url(#bgC)"/>
+  <rect x="84" y="84" width="1272" height="856" rx="42" fill="#FFFDF9" stroke="#DDD4C6"/>
+  <rect x="84" y="84" width="1272" height="212" rx="42" fill="#182029"/>
+  <path d="M84 254H1356V296H84V254Z" fill="#182029"/>
+  <circle cx="1224" cy="190" r="88" fill="#20303A"/>
+  <circle cx="1286" cy="164" r="36" fill="#2A4540"/>
+  <text x="160" y="164" fill="#88A79A" font-family="Arial, sans-serif" font-size="15" letter-spacing="4">OPTION C</text>
+  <text x="160" y="234" fill="#F6EFE6" font-family="Georgia, serif" font-size="68" font-weight="700">Compact command center</text>
+  <text x="160" y="276" fill="#C7D0CC" font-family="Arial, sans-serif" font-size="22">A denser operator-friendly login, but still much lighter than the current screen.</text>
+  <text x="160" y="396" fill="#13181E" font-family="Arial, sans-serif" font-size="18" letter-spacing="3">AUTHORIZED ACCESS</text>
+  <text x="160" y="458" fill="#13181E" font-family="Georgia, serif" font-size="58" font-weight="700">Fast to scan.</text>
+  <text x="160" y="510" fill="#13181E" font-family="Georgia, serif" font-size="58" font-weight="700">Fast to use.</text>
+  <text x="160" y="576" fill="#5B646F" font-family="Arial, sans-serif" font-size="23">The left side keeps one short promise; the right side holds the form and the only active call to action.</text>
+  <rect x="792" y="364" width="420" height="76" rx="18" fill="#FCFAF6" stroke="#D8D0C4"/>
+  <text x="820" y="393" fill="#70806D" font-family="Arial, sans-serif" font-size="13" letter-spacing="2">DOMAIN</text>
+  <text x="820" y="421" fill="#13181E" font-family="Arial, sans-serif" font-size="23">PTPORTUGAL</text>
+  <path d="M1160 394L1176 410L1192 394" stroke="#70806D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="792" y="458" width="420" height="76" rx="18" fill="#FCFAF6" stroke="#D8D0C4"/>
+  <text x="820" y="487" fill="#70806D" font-family="Arial, sans-serif" font-size="13" letter-spacing="2">USERNAME</text>
+  <text x="820" y="515" fill="#A0A7AE" font-family="Arial, sans-serif" font-size="23">username</text>
+  <rect x="792" y="552" width="420" height="76" rx="18" fill="#FCFAF6" stroke="#D8D0C4"/>
+  <text x="820" y="581" fill="#70806D" font-family="Arial, sans-serif" font-size="13" letter-spacing="2">PASSWORD</text>
+  <text x="820" y="609" fill="#A0A7AE" font-family="Arial, sans-serif" font-size="23">••••••••••••</text>
+  <rect x="792" y="664" width="420" height="68" rx="18" fill="#1F8A70"/>
+  <text x="1002" y="707" text-anchor="middle" fill="#F6FBF9" font-family="Arial, sans-serif" font-size="22" font-weight="700">Login</text>
+  <rect x="792" y="756" width="420" height="86" rx="18" fill="#F5F1EA" stroke="#E2DBD0"/>
+  <text x="820" y="792" fill="#70806D" font-family="Arial, sans-serif" font-size="13" letter-spacing="2">MESSAGE ZONE</text>
+  <text x="820" y="826" fill="#5B646F" font-family="Arial, sans-serif" font-size="21">Expired-session and generic auth errors stay here, not in the hero area.</text>
+  <defs>
+    <linearGradient id="bgC" x1="72" y1="72" x2="1324" y2="952" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7F2EA"/>
+      <stop offset="1" stop-color="#E9DECF"/>
+    </linearGradient>
+  </defs>
+</svg>

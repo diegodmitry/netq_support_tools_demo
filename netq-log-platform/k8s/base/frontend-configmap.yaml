@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: netq-log-platform-frontend-config
+data:
+  NODE_ENV: "production"
+  NETQ_API_BASE_URL: "http://127.0.0.1:8000/api/v1"
+  NETQ_SKIP_AUTH: "false"
+  NETQ_USE_MOCKS: "false"

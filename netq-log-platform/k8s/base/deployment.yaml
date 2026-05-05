@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netq-log-platform-ptc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: netq-log-platform-ptc
+  template:
+    metadata:
+      labels:
+        app: netq-log-platform-ptc
+    spec:
+      containers:
+        - name: backend
+          image: ossm-docker-registry.telecom.pt:5000/netq-log-platform-backend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+              name: http-backend
+          envFrom:
+            - configMapRef:
+                name: netq-log-platform-backend-config
+            - secretRef:
+                name: netq-log-platform-backend-secret
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http-backend
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http-backend
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+        - name: frontend
+          image: ossm-docker-registry.telecom.pt:5000/netq-log-platform-frontend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              name: http-frontend
+          envFrom:
+            - configMapRef:
+                name: netq-log-platform-frontend-config
+          readinessProbe:
+            httpGet:
+              path: /login
+              port: http-frontend
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /login
+              port: http-frontend
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
