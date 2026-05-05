@@ -1,0 +1,13 @@
+.DS_Store
+.coverage
+.pytest_cache/
+.ruff_cache/
+.venv/
+backend/.pytest_cache/
+backend/.ruff_cache/
+backend/tests/__pycache__/
+frontend/.next/
+frontend/coverage/
+frontend/node_modules/
+**/__pycache__/
+**/*.pyc
