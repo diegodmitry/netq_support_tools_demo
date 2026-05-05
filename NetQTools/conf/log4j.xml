@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60">
+    <Properties>
+        <Property name="log-path">./log</Property>
+    </Properties>
+    <Appenders>
+        <Console name="APPENDER_CONSOLE_OUT" target="SYSTEM_OUT" direct="false">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p - %m%n"/>
+        </Console>
+        <Console name="APPENDER_CONSOLE_ERR" target="SYSTEM_ERR" direct="false">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p - %m%n"/>
+        </Console>
+        <RollingRandomAccessFile  name="APPENDER_APP" append="true" fileName="${log-path}/app.log" filePattern="${log-path}/app.log.%i">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p - %m%n"/>
+            <Policies>
+                 <SizeBasedTriggeringPolicy size="20 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingRandomAccessFile>
+		<RollingRandomAccessFile  name="APPENDER_APP_CONSULT_CACHE" append="true" fileName="${log-path}/app_consult_cache.log" filePattern="${log-path}/app_consult_cache.log.%i">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p - %m%n"/>
+            <Policies>
+                 <SizeBasedTriggeringPolicy size="20 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingRandomAccessFile>
+		<RollingRandomAccessFile  name="APPENDER_APP_CONSULT_DB" append="true" fileName="${log-path}/app_consult_db.log" filePattern="${log-path}/app_consult_db.log.%i">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p - %m%n"/>
+            <Policies>
+                 <SizeBasedTriggeringPolicy size="20 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingRandomAccessFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="LOGGER_APP" level="debug">
+            <AppenderRef ref="APPENDER_APP" level="debug"/>
+        </Logger>
+		<Logger name="LOGGER_APP_CONSULT_CACHE" level="debug">
+            <AppenderRef ref="APPENDER_APP_CONSULT_CACHE" level="debug"/>
+        </Logger>
+		<Logger name="LOGGER_APP_CONSULT_DB" level="debug">
+            <AppenderRef ref="APPENDER_APP_CONSULT_DB" level="debug"/>
+        </Logger>
+        <root level="debug"></root>  
+    </Loggers>
+</Configuration>
