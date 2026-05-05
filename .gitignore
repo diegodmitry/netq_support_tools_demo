@@ -1,0 +1,51 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Editors and IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Python
+.venv/
+venv/
+**/.venv/
+**/__pycache__/
+**/*.pyc
+.coverage
+.pytest_cache/
+.ruff_cache/
+
+# Node / Next.js
+node_modules/
+**/node_modules/
+.next/
+**/.next/
+coverage/
+**/coverage/
+
+# Logs and temp files
+*.log
+tmp/
+temp/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+cookies.txt
+**/cookies.txt
+
+# Build artifacts
+dist/
+build/
+out/
+target/
+
+# NetBeans / legacy project-local files
+**/nbproject/private/
